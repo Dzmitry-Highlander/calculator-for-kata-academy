@@ -14,10 +14,10 @@ public class Validator implements IValidator {
 
     @Override
     public String[] validation(String input) {
-        String[] validated = new String[2];
+        String[] validated = new String[4];
         String[] validationArray = input.toUpperCase().split(" ");
 
-        validated[1] = ENotations.ERROR.getNotation();
+        validated[3] = ENotations.ERROR.getNotation();
 
         if (validationArray.length != 3) {
             error();
@@ -25,7 +25,8 @@ public class Validator implements IValidator {
 
         for (String number : arabicArray) {
             if (Objects.equals(validationArray[0], number)) {
-                validated[1] = ENotations.ARABIC.getNotation();
+                validated[0] = number;
+                validated[3] = ENotations.ARABIC.getNotation();
 
                 break;
             }
@@ -33,66 +34,72 @@ public class Validator implements IValidator {
 
         for (String number : romanArray) {
             if (Objects.equals(validationArray[0], number)) {
-                validated[1] = ENotations.ROMAN.getNotation();
+                validated[0] = number;
+                validated[3] = ENotations.ROMAN.getNotation();
 
+                System.out.println(validated[0]);
                 break;
             }
         }
 
-        if (Objects.equals(validated[1], ENotations.ARABIC.getNotation())) {
-            validated[1] = ENotations.ERROR.getNotation();
+        if (Objects.equals(validated[3], ENotations.ARABIC.getNotation())) {
+            validated[3] = ENotations.ERROR.getNotation();
 
             for (String number : arabicArray) {
                 if (Objects.equals(validationArray[2], number)) {
-                    validated[1] = ENotations.ARABIC.getNotation();
+                    validated[1] = number;
+                    validated[3] = ENotations.ARABIC.getNotation();
 
                     break;
                 }
             }
 
-            if (Objects.equals(validated[1], ENotations.ERROR.getNotation())) {
+            if (Objects.equals(validated[3], ENotations.ERROR.getNotation())) {
                 error();
             }
 
-            validated[1] = ENotations.ERROR.getNotation();
+            validated[3] = ENotations.ERROR.getNotation();
 
             for (String operand : operandsArray) {
                 if (Objects.equals(validationArray[1], operand)) {
-                    validated[1] = ENotations.ARABIC.getNotation();
+                    validated[2] = operand;
+                    validated[3] = ENotations.ARABIC.getNotation();
 
                     break;
                 }
             }
 
-            if (Objects.equals(validated[1], ENotations.ERROR.getNotation())) {
+            if (Objects.equals(validated[3], ENotations.ERROR.getNotation())) {
                 error();
             }
-        } else if (Objects.equals(validated[1], ENotations.ROMAN.getNotation())) {
-            validated[1] = ENotations.ERROR.getNotation();
+        } else if (Objects.equals(validated[3], ENotations.ROMAN.getNotation())) {
+            validated[3] = ENotations.ERROR.getNotation();
 
             for (String number : romanArray) {
                 if (Objects.equals(validationArray[2], number)) {
-                    validated[1] = ENotations.ROMAN.getNotation();
+                    validated[1] = number;
+                    validated[3] = ENotations.ROMAN.getNotation();
 
                     break;
                 }
             }
 
-            if (Objects.equals(validated[1], ENotations.ERROR.getNotation())) {
+            if (Objects.equals(validated[3], ENotations.ERROR.getNotation())) {
                 error();
             }
 
-            validated[1] = ENotations.ERROR.getNotation();
+            validated[3] = ENotations.ERROR.getNotation();
 
             for (String operand : operandsArray) {
                 if (Objects.equals(validationArray[1], operand)) {
-                    validated[1] = ENotations.ROMAN.getNotation();
+                    validated[2] = operand;
+                    validated[3] = ENotations.ROMAN.getNotation();
 
                     break;
                 }
             }
 
-            if (Objects.equals(validated[1], ENotations.ERROR.getNotation())) {
+            if (Objects.equals(validated[3], ENotations.ERROR.getNotation())) {
                 error();
             }
         } else {
