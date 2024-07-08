@@ -5,7 +5,7 @@ class Validator {
     private final String[] romanArray = new String[] {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
     private final String[] operandsArray = new String[] {"+", "-", "*", "/"};
 
-    String[] validation(String input) {
+    public String[] validation(String input) {
         String[] validated = new String[4];
         String[] validationArray = input.toUpperCase().split(" ");
 

@@ -1,5 +1,5 @@
 class Calculator {
-    private static int result;
+    static int result;
     static Validator validator = new Validator();
     static Converter converter = new Converter();
 
