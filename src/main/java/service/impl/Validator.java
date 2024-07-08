@@ -5,7 +5,6 @@ import service.enums.EErrors;
 import service.enums.ENotations;
 import service.exception.ValidationException;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Validator implements IValidator {
@@ -16,8 +15,9 @@ public class Validator implements IValidator {
     @Override
     public String[] validation(String input) {
         String[] validated = new String[2];
-
         String[] validationArray = input.toUpperCase().split(" ");
+
+        validated[1] = ENotations.ERROR.getNotation();
 
         if (validationArray.length != 3) {
             error();
@@ -50,9 +50,7 @@ public class Validator implements IValidator {
                 }
             }
 
-            if (Objects.equals(validated[1], ENotations.ARABIC.getNotation())) {
-                validated[0] = Arrays.toString(validationArray);
-            } else {
+            if (Objects.equals(validated[1], ENotations.ERROR.getNotation())) {
                 error();
             }
 
@@ -66,9 +64,7 @@ public class Validator implements IValidator {
                 }
             }
 
-            if (Objects.equals(validated[1], ENotations.ARABIC.getNotation())) {
-                validated[0] = Arrays.toString(validationArray);
-            } else {
+            if (Objects.equals(validated[1], ENotations.ERROR.getNotation())) {
                 error();
             }
         } else if (Objects.equals(validated[1], ENotations.ROMAN.getNotation())) {
@@ -82,9 +78,7 @@ public class Validator implements IValidator {
                 }
             }
 
-            if (Objects.equals(validated[1], ENotations.ROMAN.getNotation())) {
-                validated[0] = Arrays.toString(validationArray);
-            } else {
+            if (Objects.equals(validated[1], ENotations.ERROR.getNotation())) {
                 error();
             }
 
@@ -98,9 +92,7 @@ public class Validator implements IValidator {
                 }
             }
 
-            if (Objects.equals(validated[1], ENotations.ROMAN.getNotation())) {
-                validated[0] = Arrays.toString(validationArray);
-            } else {
+            if (Objects.equals(validated[1], ENotations.ERROR.getNotation())) {
                 error();
             }
         } else {
