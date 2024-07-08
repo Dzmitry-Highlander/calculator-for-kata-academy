@@ -1,12 +1,10 @@
-import service.impl.Calculator;
-
 import java.util.Scanner;
 
 public static void main() {
     Scanner scanner = new Scanner(System.in);
-    Calculator calculator = new Calculator();
+    String input = scanner.nextLine();
 
-    System.out.println(calculator.calc(scanner.nextLine()));
+    System.out.println(Calculator.calc(input));
 }
 
 

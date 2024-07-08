@@ -1,11 +1,9 @@
-package service.enums;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum ENotations {
+enum ENotations {
     ARABIC ("Arabic"),
     ROMAN ("Roman"),
     ERROR ("Error");

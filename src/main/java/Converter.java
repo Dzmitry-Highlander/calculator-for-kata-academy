@@ -1,19 +1,11 @@
-package service.impl;
-
-import service.api.IConverter;
-import service.enums.EErrors;
-import service.enums.ENotations;
-import service.exception.ValidationException;
-
 import java.util.Objects;
 
-public class Converter implements IConverter {
+class Converter {
     private final String[] convertArray = new String[] {
             "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
             "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
     };
 
-    @Override
     public String[] convertInput(String[] input) {
         String[] converted = new String[input.length];
 
@@ -35,7 +27,6 @@ public class Converter implements IConverter {
         return converted;
     }
 
-    @Override
     public String convertOutput(int input, String notation) {
         StringBuilder output = new StringBuilder();
 
@@ -44,9 +35,9 @@ public class Converter implements IConverter {
         } else {
             if (input <= 0) {
                 try {
-                    throw new ValidationException(EErrors.InputError.getMessage());
-                } catch (ValidationException e) {
-                    System.out.println(e.getItem());
+                    throw new RuntimeException("Неверный ввод данных! Ознакомьтесь с инструкцией!");
+                } catch (RuntimeException e) {
+                    System.out.println(e.getMessage());
 
                     System.exit(404);
                 }

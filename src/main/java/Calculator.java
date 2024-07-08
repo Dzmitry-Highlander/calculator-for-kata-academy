@@ -1,14 +1,9 @@
-package service.impl;
+class Calculator {
+    private static int result;
+    static Validator validator = new Validator();
+    static Converter converter = new Converter();
 
-import service.api.ICalculator;
-
-public class Calculator implements ICalculator {
-    private int result;
-    Validator validator = new Validator();
-    Converter converter = new Converter();
-
-    @Override
-    public String calc(String input) {
+    public static String calc(String input) {
         String[] validated = validator.validation(input);
         String[] converted = converter.convertInput(validated);
 

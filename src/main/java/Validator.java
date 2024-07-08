@@ -1,19 +1,11 @@
-package service.impl;
-
-import service.api.IValidator;
-import service.enums.EErrors;
-import service.enums.ENotations;
-import service.exception.ValidationException;
-
 import java.util.Objects;
 
-public class Validator implements IValidator {
+class Validator {
     private final String[] arabicArray = new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     private final String[] romanArray = new String[] {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
     private final String[] operandsArray = new String[] {"+", "-", "*", "/"};
 
-    @Override
-    public String[] validation(String input) {
+    String[] validation(String input) {
         String[] validated = new String[4];
         String[] validationArray = input.toUpperCase().split(" ");
 
@@ -110,9 +102,9 @@ public class Validator implements IValidator {
 
     private void error() {
         try {
-            throw new ValidationException(EErrors.InputError.getMessage());
-        } catch (ValidationException e) {
-            System.out.println(e.getItem());
+            throw new RuntimeException("Неверный ввод данных! Ознакомьтесь с инструкцией!");
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
 
             System.exit(404);
         }
