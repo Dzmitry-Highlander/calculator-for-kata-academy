@@ -8,8 +8,8 @@ import service.exception.ValidationException;
 import java.util.Objects;
 
 public class Converter implements IConverter {
-    private final String[] arabicArray = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    private final String[] romanArray = new String[] {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
+    private final String[] convertArray = new String[] {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     String[] converted;
     boolean existingFlag = false;
 
@@ -23,7 +23,7 @@ public class Converter implements IConverter {
             converted = input[0].split("");
 
             for (int i = 0; i < converted.length; i = i + 2) {
-                for (String roman : romanArray) {
+                for (String roman : convertArray) {
                     if (Objects.equals(roman, converted[i])) {
                         existingFlag = true;
 
@@ -31,7 +31,9 @@ public class Converter implements IConverter {
                     }
                 }
 
-                converted[i] = romanArray[i];
+                if (existingFlag) {
+                    converted[i] = convertArray[i + 10];
+                }
             }
 
             return converted;
