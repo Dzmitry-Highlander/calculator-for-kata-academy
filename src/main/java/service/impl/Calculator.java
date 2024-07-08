@@ -4,32 +4,21 @@ import service.api.ICalculator;
 
 public class Calculator implements ICalculator {
     private int result;
+    Validator validator = new Validator();
+    Converter converter = new Converter();
 
     @Override
-    public int addition(int a, int b) {
-        result = a + b;
+    public String calc(String input) {
+        String[] validated = validator.validation(input);
+        String[] converted = converter.convertInput(validated);
 
-        return result;
-    }
+        switch (converted[2]) {
+            case "+" -> result = Integer.parseInt(converted[0]) + Integer.parseInt(converted[1]);
+            case "-" -> result = Integer.parseInt(converted[0]) - Integer.parseInt(converted[1]);
+            case "*" -> result = Integer.parseInt(converted[0]) * Integer.parseInt(converted[1]);
+            case "/" -> result = Integer.parseInt(converted[0]) / Integer.parseInt(converted[1]);
+        }
 
-    @Override
-    public int subtraction(int a, int b) {
-        result = a - b;
-
-        return result;
-    }
-
-    @Override
-    public int multiplication(int a, int b) {
-        result = a * b;
-
-        return result;
-    }
-
-    @Override
-    public int division(int a, int b) {
-        result = a / b;
-
-        return result;
+        return converter.convertOutput(result, converted[3]);
     }
 }
