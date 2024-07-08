@@ -37,7 +37,6 @@ public class Validator implements IValidator {
                 validated[0] = number;
                 validated[3] = ENotations.ROMAN.getNotation();
 
-                System.out.println(validated[0]);
                 break;
             }
         }
