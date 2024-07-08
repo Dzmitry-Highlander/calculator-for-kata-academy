@@ -7,7 +7,8 @@ import lombok.Getter;
 @Getter
 public enum ENotations {
     ARABIC ("Arabic"),
-    ROMAN ("Roman");
+    ROMAN ("Roman"),
+    ERROR ("Error");
 
     private final String notation;
 }
