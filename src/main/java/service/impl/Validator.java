@@ -16,56 +16,107 @@ public class Validator implements IValidator {
     @Override
     public String[] validation(String input) {
         String[] validated = new String[2];
-        boolean existingFlag = false;
-        String notationFlag = "";
 
-        String[] validationArray =  input.toUpperCase().split(" ");
+        String[] validationArray = input.toUpperCase().split(" ");
 
-        if (validationArray.length > 3) {
-            throw new ValidationException(EErrors.InputError.getMessage());
+        if (validationArray.length != 3) {
+            error();
         }
 
-        for (int i = 0; i < validationArray.length; i = i + 2) {
-            for (String arabic : arabicArray) {
-                if (Objects.equals(arabic, validationArray[i])) {
-                    existingFlag = true;
-                    notationFlag = ENotations.ARABIC.getNotation();
+        for (String number : arabicArray) {
+            if (Objects.equals(validationArray[0], number)) {
+                validated[1] = ENotations.ARABIC.getNotation();
 
-                    break;
-                } else {
-                    throw new ValidationException(EErrors.InputError.getMessage());
-                }
+                break;
             }
         }
 
-        for (int i = 0; i < validationArray.length; i = i + 2) {
-            for (String roman : romanArray) {
-                if (Objects.equals(roman, validationArray[i])) {
-                    existingFlag = true;
-                    notationFlag = ENotations.ROMAN.getNotation();
+        for (String number : romanArray) {
+            if (Objects.equals(validationArray[0], number)) {
+                validated[1] = ENotations.ROMAN.getNotation();
 
-                    break;
-                } else {
-                    throw new ValidationException(EErrors.InputError.getMessage());
-                }
+                break;
             }
         }
 
-        if (existingFlag) {
-            for (int i = 1; i < validationArray.length; i = i + 2) {
-                for (String operand : operandsArray) {
-                    if (Objects.equals(operand, validationArray[i])) {
-                        validated[0] = Arrays.toString(validationArray);
-                        validated[1] = notationFlag;
-                    } else {
-                        throw new ValidationException(EErrors.InputError.getMessage());
-                    }
+        if (Objects.equals(validated[1], ENotations.ARABIC.getNotation())) {
+            validated[1] = ENotations.ERROR.getNotation();
+
+            for (String number : arabicArray) {
+                if (Objects.equals(validationArray[2], number)) {
+                    validated[1] = ENotations.ARABIC.getNotation();
+
+                    break;
                 }
+            }
+
+            if (Objects.equals(validated[1], ENotations.ARABIC.getNotation())) {
+                validated[0] = Arrays.toString(validationArray);
+            } else {
+                error();
+            }
+
+            validated[1] = ENotations.ERROR.getNotation();
+
+            for (String operand : operandsArray) {
+                if (Objects.equals(validationArray[1], operand)) {
+                    validated[1] = ENotations.ARABIC.getNotation();
+
+                    break;
+                }
+            }
+
+            if (Objects.equals(validated[1], ENotations.ARABIC.getNotation())) {
+                validated[0] = Arrays.toString(validationArray);
+            } else {
+                error();
+            }
+        } else if (Objects.equals(validated[1], ENotations.ROMAN.getNotation())) {
+            validated[1] = ENotations.ERROR.getNotation();
+
+            for (String number : romanArray) {
+                if (Objects.equals(validationArray[2], number)) {
+                    validated[1] = ENotations.ROMAN.getNotation();
+
+                    break;
+                }
+            }
+
+            if (Objects.equals(validated[1], ENotations.ROMAN.getNotation())) {
+                validated[0] = Arrays.toString(validationArray);
+            } else {
+                error();
+            }
+
+            validated[1] = ENotations.ERROR.getNotation();
+
+            for (String operand : operandsArray) {
+                if (Objects.equals(validationArray[1], operand)) {
+                    validated[1] = ENotations.ROMAN.getNotation();
+
+                    break;
+                }
+            }
+
+            if (Objects.equals(validated[1], ENotations.ROMAN.getNotation())) {
+                validated[0] = Arrays.toString(validationArray);
+            } else {
+                error();
             }
         } else {
-            throw new ValidationException(EErrors.InputError.getMessage());
+            error();
         }
 
         return validated;
+    }
+
+    private void error() {
+        try {
+            throw new ValidationException(EErrors.InputError.getMessage());
+        } catch (ValidationException e) {
+            System.out.println(e.getItem());
+
+            System.exit(404);
+        }
     }
 }
