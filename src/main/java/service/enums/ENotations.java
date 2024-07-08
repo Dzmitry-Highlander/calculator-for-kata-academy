@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum ENotation {
+public enum ENotations {
     ARABIC ("Arabic"),
     ROMAN ("Roman");
 
