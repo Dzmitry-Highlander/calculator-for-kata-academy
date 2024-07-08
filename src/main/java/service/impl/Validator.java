@@ -2,7 +2,7 @@ package service.impl;
 
 import service.api.IValidator;
 import service.enums.EErrors;
-import service.enums.ENotation;
+import service.enums.ENotations;
 import service.exception.ValidationException;
 
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public class Validator implements IValidator {
             for (String arabic : arabicArray) {
                 if (Objects.equals(arabic, validationArray[i])) {
                     existingFlag = true;
-                    notationFlag = ENotation.ARABIC.getNotation();
+                    notationFlag = ENotations.ARABIC.getNotation();
 
                     break;
                 } else {
@@ -42,7 +42,7 @@ public class Validator implements IValidator {
             for (String roman : romanArray) {
                 if (Objects.equals(roman, validationArray[i])) {
                     existingFlag = true;
-                    notationFlag = ENotation.ROMAN.getNotation();
+                    notationFlag = ENotations.ROMAN.getNotation();
 
                     break;
                 } else {
