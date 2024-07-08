@@ -1,7 +1,9 @@
 package service.impl;
 
 import service.api.IConverter;
+import service.enums.EErrors;
 import service.enums.ENotations;
+import service.exception.ValidationException;
 
 import java.util.Objects;
 
@@ -34,7 +36,41 @@ public class Converter implements IConverter {
     }
 
     @Override
-    public String convertOutput(int output, String notation) {
-        return "";
+    public String convertOutput(int input, String notation) {
+        StringBuilder output = new StringBuilder();
+
+        if (Objects.equals(notation, ENotations.ARABIC.getNotation())) {
+            output = new StringBuilder(String.valueOf(input));
+        } else {
+            if (input <= 0) {
+                try {
+                    throw new ValidationException(EErrors.InputError.getMessage());
+                } catch (ValidationException e) {
+                    System.out.println(e.getItem());
+
+                    System.exit(404);
+                }
+            }
+
+            if (input - 10 <= 0) {
+                for (int i = 10; i < convertArray.length; i++) {
+                    if (Objects.equals(String.valueOf(input), convertArray[i])) {
+                        output = new StringBuilder(convertArray[i - 10]);
+                    }
+                }
+            } else {
+                int dozens = input / 10;
+
+                output.append("X".repeat(dozens));
+
+                for (int i = 10; i < convertArray.length; i++) {
+                    if (Objects.equals(String.valueOf(input % 10), convertArray[i])) {
+                        output.append(convertArray[i - 10]);
+                    }
+                }
+            }
+        }
+
+        return output.toString();
     }
 }
