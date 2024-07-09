@@ -7,7 +7,7 @@ public class Main {
     static Validator validator = new Validator();
     static Converter converter = new Converter();
 
-    public static void main(String[] args) {
+    public static void main(String[] ignoredArgs) {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
