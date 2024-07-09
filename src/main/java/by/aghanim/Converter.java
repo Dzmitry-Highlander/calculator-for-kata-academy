@@ -1,3 +1,5 @@
+package by.aghanim;
+
 import java.util.Objects;
 
 class Converter {

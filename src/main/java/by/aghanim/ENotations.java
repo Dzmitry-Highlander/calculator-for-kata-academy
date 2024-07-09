@@ -1,3 +1,5 @@
+package by.aghanim;
+
 enum ENotations {
     ARABIC ("Arabic"),
     ROMAN ("Roman"),
